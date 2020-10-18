@@ -1,0 +1,5 @@
+Todos of User: {{userId}}
+<app-card
+  *ngFor="let todo of todos$ | async"
+  [todo]="todo"
+></app-card>

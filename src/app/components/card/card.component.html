@@ -1,0 +1,51 @@
+<mat-card [class.shadow]="editMode">
+  <mat-card-header [class.shadow]="!editMode">
+    <mat-card-title
+      *ngIf="!editMode; else inputTitle"
+    >
+      <a [routerLink]="['/todo', todo.id]"
+         queryParamsHandling="merge"
+    >{{todo.title}}</a>
+    </mat-card-title>
+    <ng-template #inputTitle>
+      <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <mat-label>Title</mat-label>
+          <input matInput [formControl]="titleFormControl" placeholder="My Todo 1">
+        </mat-form-field>
+        <mat-error *ngIf="titleFormControl.hasError('minlength') && !titleFormControl.hasError('required')">
+          Please enter a valid title (more than 3 letters)
+        </mat-error>
+        <mat-error *ngIf="titleFormControl.hasError('required')">
+          Title is <strong>required</strong>
+        </mat-error>
+        <button mat-button
+          (click)="handleEdit()"
+        >
+          <mat-icon>edit</mat-icon>
+          Edit
+        </button>
+      </form>
+
+    </ng-template>
+    <mat-card-subtitle>User: {{todo.userId}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-actions *ngIf="editMode">
+    <button mat-button *ngIf="!todo.completed; else completed" (click)="handleComplete()">
+      <mat-icon>done</mat-icon>
+      Complete
+    </button>
+    <ng-template #completed>
+      <button mat-button (click)="handleUncomplete()">
+        <mat-icon>close</mat-icon>
+        Uncomplete
+      </button>
+    </ng-template>
+
+
+    <button mat-button (click)="handleDelete()">
+      <mat-icon>delete</mat-icon>
+      Delete
+    </button>
+  </mat-card-actions>
+</mat-card>

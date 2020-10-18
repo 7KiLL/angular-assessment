@@ -1,0 +1,24 @@
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <mat-label>User Id</mat-label>
+    <input matInput disabled [value]="userId">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Title</mat-label>
+    <input matInput [formControl]="titleFormControl" placeholder="My Todo 1">
+  </mat-form-field>
+  <mat-error *ngIf="titleFormControl.hasError('minlength') && !titleFormControl.hasError('required')">
+    Please enter a valid title (more than 3 letters)
+  </mat-error>
+  <mat-error *ngIf="titleFormControl.hasError('required')">
+    Title is <strong>required</strong>
+  </mat-error>
+  <button mat-button
+          [disabled]="titleFormControl.invalid"
+  (click)="handleAdd()">
+    Add
+  </button>
+</form>
+
+

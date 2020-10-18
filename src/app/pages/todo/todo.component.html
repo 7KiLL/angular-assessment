@@ -1,0 +1,8 @@
+<app-card
+  [todo]="todo"
+  editMode
+  (edited)="handleEdit($event)"
+  (completed)="handleComplete()"
+  (deleted)="handleDelete()"
+  (uncompleted)="handleUncomplete()"
+></app-card>
